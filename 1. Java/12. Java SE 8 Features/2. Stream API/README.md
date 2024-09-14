@@ -1,6 +1,6 @@
 # Stream API in Java
 
-### Definition:
+## Definition:
 
 - A `Stream` is a sequence of elements supporting sequential and parallel aggregate operations.
 - Streams can be created from collections, arrays, or I/O channels.
@@ -8,32 +8,128 @@
 - It provides a more concise and readable way to perform operations such as filtering, mapping, and reducing collections.
 - Syntax: `Stream<T> stream;`
 
-### Stream Operations:
+## Stream Operations:
 
 - **Intermediate Operations**: Transform a stream into another stream. They are lazy, meaning they are not executed until a terminal operation is invoked.
   - Examples: `filter()`, `map()`, `flatMap()`, `sorted()`, `distinct()`.
 - **Terminal Operations**: Produce a result or a side-effect. They trigger the processing of the stream.
   - Examples: `forEach()`, `collect()`, `reduce()`, `count()`, `findFirst()`.
 
-### Creating Streams:
+## Creating Streams:
 
-- From a collection:
+### 1. List to Stream
+
+```java
+List<String> names = List.of("Alice", "Bob", "Charlie");
+Stream<String> nameStream = names.stream();
+```
+
+### 2. Array to Stream
+
+For arrays, you can use Arrays.stream() or Stream.of().
+
+```java
+String[] nameArray = {"Alice", "Bob", "Charlie"};
+Stream<String> arrayStream = Arrays.stream(nameArray);
+
+// Alternatively
+Stream<String> arrayStream2 = Stream.of(nameArray);
+```
+
+### 3. Set to Stream
+
+```java
+Set<Integer> numbers = Set.of(1, 2, 3, 4);
+Stream<Integer> numberStream = numbers.stream();
+```
+
+### 4. Map to Stream
+
+You can convert a Map to a stream of its entries (Map.Entry<K, V>), keys, or values.
+
+- #### Stream of map entries:
+
   ```java
-  List<String> list = Arrays.asList("a", "b", "c");
-  Stream<String> stream = list.stream();
-  ```
-- From an array:
-  ```java
-  Stream<int> stream = Stream.of(1, 2, 3, 4, 5);
-  ```
-- Using `Stream.generate()` or `Stream.iterate()`:
-  ```java
-  Stream<Double> randomNumbers = Stream.generate(Math::random).limit(10);
+  Map<Integer, String> employeeMap = Map.of(1, "Alice", 2, "Bob", 3, "Charlie");
+  Stream<Map.Entry<Integer, String>> entryStream = employeeMap.entrySet().stream();
   ```
 
-### **Common Stream Operations**:
+- #### Stream of map keys:
+  ```java
+  Stream<Integer> keyStream = employeeMap.keySet().stream();
+  ```
+- #### Stream of map values:
+  ```java
+  Stream<String> valueStream = employeeMap.values().stream();
+  ```
 
-- **Intermediate Operations** -
+### 5. IntStream, LongStream, DoubleStream from Arrays
+
+If you're working with primitive arrays, you can use Arrays.stream() for specific types.
+
+- #### int[] to IntStream:
+
+  ```java
+  int[] intArray = {1, 2, 3, 4};
+  IntStream intStream = Arrays.stream(intArray);
+  ```
+
+- #### long[] to LongStream:
+
+  ```java
+  long[] longArray = {1L, 2L, 3L, 4L};
+  LongStream longStream = Arrays.stream(longArray);
+  ```
+
+- #### double[] to DoubleStream:
+  ```java
+  double[] doubleArray = {1.0, 2.0, 3.0, 4.0};
+  DoubleStream doubleStream = Arrays.stream(doubleArray);
+  ```
+
+### 6. Stream of Characters from a String
+
+```java
+String input = "hello";
+Stream<Character> charStream = input.chars()
+    .mapToObj(c -> (char) c);
+```
+
+### 7. Stream from Optional
+
+```java
+Optional<String> optionalName = Optional.of("Alice");
+Stream<String> optionalStream = optionalName.stream();
+```
+
+### 8. Stream of Custom Objects
+
+If you have a collection of custom objects (like List<Employee>), you can convert it to a stream just like any other collection.
+
+```java
+List<Employee> employees = List.of(new Employee("Alice"), new Employee("Bob"));
+Stream<Employee> employeeStream = employees.stream();
+```
+
+### 9. Generating Infinite Streams
+
+You can generate infinite streams using Stream.generate() or Stream.iterate().
+
+Using Stream.generate():
+
+```java
+Stream<Double> randomNumbers = Stream.generate(Math::random).limit(10);  // Generates 10 random numbers
+```
+
+Using Stream.iterate():
+
+```java
+Stream<Integer> evenNumbers = Stream.iterate(0, n -> n + 2).limit(10);  // Generates the first 10 even numbers
+```
+
+## Common Stream Operations:
+
+### Intermediate Operations:
 
 1. `filter()`:
 
@@ -111,7 +207,7 @@
          .collect(Collectors.toList());
      ```
 
-- **Terminal Operations** -
+### Terminal Operations:
 
 1. `reduce()`:
 
@@ -122,6 +218,7 @@
    - Example:
      ```java
      int sum = numbers.stream().reduce(0, Integer::sum);
+     double totalSalary = employees.stream().map(Employee::getSalary).reduce(0.0, Double::sum);
      ```
 
 2. `collect()`:
@@ -132,10 +229,10 @@
      List<String> upperCaseList = list.stream().map(String::toUpperCase).collect(Collectors.toList());
      ```
    - Collectors:
-     1. Collectors.toList()
-     2. Collectors.toSet()
-     3. Collectors.toMap(String::length, (x)->x)
-     4. Collectors.toCollection(ArrayDeque::new)
+     1. `Collectors.toList()`
+     2. `Collectors.toSet()`
+     3. `Collectors.toMap(String::length, (x)->x)`
+     4. `Collectors.toCollection(ArrayDeque::new)`
 
 3. `forEach()`
 
@@ -177,12 +274,12 @@
      boolean anyStartWithS = names.stream().anyMatch(name -> name.startsWith("S"));
      ```
 
-### Notes:
+## Notes:
 
 1. A stream is not a data structure instead it takes input from the Collections, Arrays or I/O channels.
 2. Streams don’t change the original data structure, they only provide the result as per the pipelined methods.
 
-### Time Complexity
+## Time Complexity
 
 - **filter()**: O(n)
 - **map()**: O(n)
