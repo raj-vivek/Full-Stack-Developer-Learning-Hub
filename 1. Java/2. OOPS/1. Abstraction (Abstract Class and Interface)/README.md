@@ -17,7 +17,7 @@
 ### What is an Abstract Class?
 
 - An abstract class is a class that cannot be instantiated and is declared with the `abstract` keyword.
-- It can have both abstract methods (without implementation) and concrete methods (with implementation).
+- It can have both abstract methods and concrete methods (with implementation).
 - Abstract classes are used to provide a common base for subclasses.
 
 ### Some important observations about abstract classes are as follows:
@@ -25,17 +25,18 @@
 - An instance of an `abstract` class can not be created.
 - Constructors are allowed.
 - We can have an `abstract` class without any `abstract` method.
-- There can be a `final` method in `abstract` class but any `abstract` method in the `abstract` class can not be declared as final or in simpler terms `final` method can not be `abstract` itself as it will yield an error: “Illegal combination of modifiers: abstract and final”
-- We can define static methods in an abstract class
+- `final` method can not be `abstract` as it will yield an error: `Illegal combination of modifiers: abstract and final`
+- We can define `static` methods in an abstract class
 - Top-level/Outer class as well as inner classes can be declared `abstract`.
 - If a class contains at least one `abstract` method then the class needs to be `abstract` too.
-- If the Child class is unable to provide implementation to all `abstract` methods of the Parent class then we should declare that Child class as `abstract` so that the next level Child class can provide implementation to the remaining abstract method.
+- If the `Child` class is unable to provide implementation to all `abstract` methods of the `Parent` class then it should be `abstract` too.
 
 ### What is an Interface?
 
 - An interface is a reference type in Java, similar to a class, that is declared using the `interface` keyword.
-- Interfaces can have abstract methods and, from Java 8 onwards, default and static methods.
-- All methods in an interface are implicitly public and abstract (unless default or static).
+- Interfaces can have `abstract` methods.
+- From Java 8 onwards, `default` and `static` methods.
+- All methods in an interface are implicitly `public` and `abstract` (unless `default` or `static`).
 - Interfaces define a contract that implementing classes must follow.
 
 ### Abstract Class vs. Interface
@@ -52,7 +53,7 @@
 
 **When to use which?**
 
-- Use an abstract class when you want to provide a common base class with shared code and structure.
+- Use an abstract class when you want to provide a common base class with shared code and structure and partial implementations.
 - Use an interface to define a contract for capabilities that multiple classes can implement, especially when they are not related by a common hierarchy.
 
 ### Benefits of Abstraction
@@ -64,4 +65,55 @@
 
 ### Example
 
-Consider an abstract class `Animal` with an abstract method `makeSound()`, and an interface `Pet` with a method `play()`. Concrete classes `Dog` and `Cat` extend `Animal` and implement `Pet`.
+```java
+public class Abstraction {
+    public static void main(String[] args) {
+        Animal myBird = new Bird();
+        Animal myRabbit = new Rabbit();
+        Pet petBird = new Bird();
+        Pet petRabbit = new Rabbit();
+
+        myBird.makeSound();
+        myRabbit.makeSound();
+
+        petBird.play();
+        petRabbit.play();
+    }
+}
+
+abstract class Animal {
+    abstract void makeSound();
+}
+
+interface Pet{
+    void play();
+}
+
+class Bird extends Animal implements Pet {
+
+    @Override
+    public void play() {
+        System.out.println("Bird plays");
+    }
+
+    @Override
+    void makeSound() {
+        System.out.println("Bird chirps");
+    }
+}
+
+class Rabbit extends Animal implements Pet {
+
+    @Override
+    void makeSound() {
+        System.out.println("Rabbit plays");
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Rabbit makes sound");
+    }
+    
+}
+```
+

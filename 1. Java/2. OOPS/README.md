@@ -4,17 +4,21 @@
 
 1. **Access Modifier**:
 
-   1. public:
-      Accessible in all classes in your application.
+   1. `public`:
 
-   2. protected:
-      Accessible within the package in which it is defined and, in its subclass(es) (including subclasses declared outside the package).
+      - Accessible in all classes in your application.
 
-   3. private:
-      Accessible only within the class in which it is defined.
+   2. `protected`:
 
-   4. default:
-      (declared/defined without using any modifier): The class, method, or variable is accessible only within other classes in the same package.
+      - Accessible within the package in which it is defined and, in its subclass(es) (including subclasses declared outside the package).
+
+   3. `private`:
+
+      - Accessible only within the class in which it is defined.
+
+   4. `default`:
+      - declared/defined without using any modifier
+      - The class, method, or variable is accessible only within other classes in the same package.
 
 2. Java is not a Pure Object-Oriented Language because it has Primitive Data Type.
 
@@ -32,9 +36,12 @@
    3. Copy Constructor
 
 5. **Pillars of OOPs**:
+
    1. Abstraction
-   2. Encapsulation
+   2. Polymorphism
+
+      - Compile-time polymorphism
+      - Runtime polymorphism
+
    3. Inheritance
-   4. Polymorphism
-      • Compile-time polymorphism
-      • Runtime polymorphism
+   4. Encapsulation

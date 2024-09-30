@@ -65,7 +65,7 @@ You can convert a Map to a stream of its entries (Map.Entry<K, V>), keys, or val
 
 ### 5. IntStream, LongStream, DoubleStream from Arrays
 
-If you're working with primitive arrays, you can use Arrays.stream() for specific types.
+If you're working with primitive arrays, you can use `Arrays.stream()` for specific types.
 
 - #### int[] to IntStream:
 
