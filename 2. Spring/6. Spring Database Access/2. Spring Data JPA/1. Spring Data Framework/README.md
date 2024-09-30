@@ -40,7 +40,7 @@
 
 and many more...
 
-### Example
+### Example for Spring Data JPA
 
 #### Dependency Management (`pom.xml` for Spring Data JPA)
 
@@ -96,8 +96,8 @@ private String email;
 ### Use Cases
 
 1. Data Access Layer: Simplify and streamline data access and management using repository abstractions.
-1. Integration: Seamlessly integrate with various data stores, including relational and NoSQL databases.
-1. Reducing Boilerplate: Automatically generate implementation code for data access, reducing the amount of boilerplate code you need to write.
+2. Integration: Seamlessly integrate with various data stores, including relational and NoSQL databases.
+3. Reducing Boilerplate: Automatically generate implementation code for data access, reducing the amount of boilerplate code you need to write.
 
 ### Summary
 

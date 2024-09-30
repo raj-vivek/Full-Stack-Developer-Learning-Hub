@@ -1,15 +1,9 @@
 # Spring @Bean Annotation
 
-## Theory
-
-- The `@Bean` annotation in Spring is used to explicitly declare a bean and its configuration within a Spring `@Configuration` class.
-- This annotation is used to define and configure beans that will be managed by the Spring container.
-- It is an alternative to component scanning and is used to manually specify bean creation and configuration.
-
 ### Key Points
 
 - **Definition**: The `@Bean` annotation indicates that a method produces a bean to be managed by the Spring container. The method should be within a class annotated with `@Configuration`.
-- **Purpose**: Used for defining bean instances programmatically, allowing for greater control over bean creation and configuration.
+- **Purpose**: Used for defining bean instances programmatically, allowing for greater control over bean creation and configuration, when compared to component scanning.
 - **Scope**: By default, beans defined with `@Bean` are singleton, meaning only one instance of the bean will be created. The scope can be customized using the `@Scope` annotation.
 
 ### Example

@@ -1,38 +1,39 @@
 # BeanFactory vs ApplicationContext in Spring
 
-## Theory
+## Introduction
 
 In the Spring Framework, `BeanFactory` and `ApplicationContext` are two interfaces that define the IoC container. They are responsible for instantiating, configuring, and assembling beans. While they share some common functionalities, `ApplicationContext` provides more advanced features compared to `BeanFactory`.
 
-### Key Points
+## Key Points
 
-1. **BeanFactory**:
+### 1. **BeanFactory**:
 
-   - The `BeanFactory` interface is the simplest container providing basic DI functionalities.
-   - It is defined by the `org.springframework.beans.factory.BeanFactory` interface.
-   - It uses lazy initialization, which means beans are created when they are requested for the first time.
-   - Suitable for lightweight applications where resources are limited.
+- The `BeanFactory` interface is the simplest container providing basic DI functionalities.
+- It is defined by the `org.springframework.beans.factory.BeanFactory` interface.
+- It uses lazy initialization, which means beans are created when they are requested for the first time.
+- Suitable for lightweight applications where resources are limited.
 
-2. **ApplicationContext**:
+### 2. **ApplicationContext**:
 
-   - The `ApplicationContext` interface extends `BeanFactory` and adds more enterprise-specific functionalities.
-   - It is defined by the `org.springframework.context.ApplicationContext` interface.
-   - It uses eager initialization by default, creating all singleton beans at startup.
-   - Provides features like event propagation, declarative mechanisms to create a bean, and various other enterprise-specific functionalities (e.g., internationalization, application lifecycle events).
-   - Common implementations include `ClassPathXmlApplicationContext`, `FileSystemXmlApplicationContext`, and `AnnotationConfigApplicationContext`.
+- The `ApplicationContext` interface extends `BeanFactory` and adds more enterprise-specific functionalities.
+- It is defined by the `org.springframework.context.ApplicationContext` interface.
+- It uses eager initialization by default, creating all singleton beans at startup.
+- Provides features like event propagation, declarative mechanisms to create a bean, and various other enterprise-specific functionalities (e.g., internationalization, application lifecycle events).
+- Common implementations include `ClassPathXmlApplicationContext`, `FileSystemXmlApplicationContext`, and `AnnotationConfigApplicationContext`.
 
-3. **Differences**:
-   - **Initialization**:
-     - `BeanFactory`: Lazy initialization (beans are created on demand).
-     - `ApplicationContext`: Eager initialization (all singleton beans are created at startup).
-   - **Features**:
-     - `BeanFactory`: Basic DI container.
-     - `ApplicationContext`: Advanced container with additional features like event handling, internationalization, etc.
-   - **Usage**:
-     - `BeanFactory`: Suitable for lightweight, memory-constrained environments.
-     - `ApplicationContext`: Preferred for most enterprise applications due to its comprehensive feature set.
+### 3. **Differences**:
 
-### Examples
+- **Initialization**:
+  - `BeanFactory`: Lazy initialization (beans are created on demand).
+  - `ApplicationContext`: Eager initialization (all singleton beans are created at startup).
+- **Features**:
+  - `BeanFactory`: Basic DI container.
+  - `ApplicationContext`: Advanced container with additional features like event handling, internationalization, etc.
+- **Usage**:
+  - `BeanFactory`: Suitable for lightweight, memory-constrained environments.
+  - `ApplicationContext`: Preferred for most enterprise applications due to its comprehensive feature set.
+
+## Examples
 
 1. **Using BeanFactory**:
 
@@ -49,19 +50,19 @@ In the Spring Framework, `BeanFactory` and `ApplicationContext` are two interfac
    MyBean myBean = (MyBean) context.getBean("myBean");
    ```
 
-### Use Cases
+## Use Cases
 
-- BeanFactory:
+### BeanFactory:
 
-  1. Suitable for lightweight applications or applets where resource consumption is critical.
-  2. Ideal for scenarios requiring lazy initialization of beans.
+1. Suitable for lightweight applications or applets where resource consumption is critical.
+2. Ideal for scenarios requiring lazy initialization of beans.
 
-- ApplicationContext:
+### ApplicationContext:
 
-  1. Suitable for most enterprise applications.
-  2. Recommended when advanced features like event propagation, internationalization, and AOP are needed.
+1. Suitable for most enterprise applications.
+2. Recommended when advanced features like event propagation, internationalization, and AOP are needed.
 
-### Questions
+## Questions
 
 1. What is the difference between BeanFactory and ApplicationContext in Spring?
 2. Explain the initialization process of beans in BeanFactory and ApplicationContext.

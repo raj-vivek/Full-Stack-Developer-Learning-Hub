@@ -28,44 +28,7 @@
 
 - To execute custom code during the bean lifecycle, you can use -
 
-1. **XML Configuration**:
-
-   - Configure the spring XML file spring.xml and register `initMethod()` and `destroyMethod()`
-   - Example -
-
-     ```xml
-     <bean id="myBean" class="com.example.MyBean" init-method="initMethod" destroy-method="destroyMethod" />
-     ```
-
-     ```java
-     package beans;
-     public class MyBean {
-
-         // This method executes automatically as the bean is instantiated
-         public void initMethod() throws Exception
-         {
-            System.out.println("Bean HelloWorld has been instantiated and I'm the init() method");
-         }
-
-         // This method executes when the spring container is closed
-         public void destroyMethod() throws Exception
-         {
-            System.out.println("Container has been closed and I'm the destroy() method");
-         }
-     }
-     ```
-
-     ```java
-     public static void main(String[] args) throws Exception
-     {
-
-        // Loading the Spring XML configuration file into the spring container and it will create the instance of the bean as it loads into container
-        ConfigurableApplicationContext cap = new ClassPathXmlApplicationContext("resources/spring.xml");
-
-        // It will close the spring container and as a result invokes the destroy() method
-        cap.close();
-     }
-     ```
+1. **XML Configuration**
 
 2. **Annotation Configuration**:
 
@@ -162,7 +125,7 @@ The lifecycle of a bean also depends on its scope. It defines -
 
    - A new instance will be created for a single bean definition every time a request is made for that bean.
 
-For Web-aware Spring ApplicationContext -
+For Web-aware Spring `ApplicationContext` -
 
 3. **Request**:
 

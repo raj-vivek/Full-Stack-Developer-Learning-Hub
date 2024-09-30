@@ -69,23 +69,7 @@ Spring Core Annotations simplify dependency injection and context configuration 
      }
      ```
 
-6. **@Required**:
-
-   - Indicates that a method must be called to initialize the bean property. Deprecated in newer versions of Spring.
-   - Example:
-
-     ```java
-     public class MyBean {
-         private MyService myService;
-
-         @Required
-         public void setMyService(MyService myService) {
-             this.myService = myService;
-         }
-     }
-     ```
-
-7. **@Value**:
+6. **@Value**:
 
    - Injects values from properties files or environment variables into bean fields.
    - Example:
@@ -100,7 +84,7 @@ Spring Core Annotations simplify dependency injection and context configuration 
      }
      ```
 
-8. **@Scope**:
+7. **@Scope**:
 
    - Defines the scope of a bean, such as singleton or prototype.
    - Example:
@@ -112,7 +96,7 @@ Spring Core Annotations simplify dependency injection and context configuration 
      }
      ```
 
-9. **@Lookup**:
+8. **@Lookup**:
    - Injects a dependency lookup method to retrieve a bean from the Spring container.
    - Example:
      ```java
@@ -149,19 +133,7 @@ Spring Core Annotations simplify dependency injection and context configuration 
      }
      ```
 
-3. **@ImportResource**:
-
-   - Imports XML configuration files into a Spring application context.
-   - Example:
-     ```java
-     @Configuration
-     @ImportResource("classpath:applicationContext.xml")
-     public class AppConfig {
-         // Configuration logic
-     }
-     ```
-
-4. **@PropertySource**:
+3. **@PropertySource**:
    - Specifies the locations of property files to be loaded into the Spring environment.
    - Example:
      ```java

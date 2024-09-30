@@ -19,9 +19,10 @@ Spring Data JPA is a part of the Spring Data project that simplifies the impleme
    - It provides a set of interfaces and annotations that standardize the ORM process, allowing different implementations to be used interchangeably.
    - JPA itself does not provide an implementation but specifies how to map Java objects to relational databases and manage persistence.
    - Features:
-     1. JPA includes features such as the EntityManager
+     1. JPA includes features such as the `EntityManagerFactory` and `EntityManager`
      2. JPQL (Java Persistence Query Language)
-     3. Criteria API for querying entities
+     3. `@Transactional`
+     4. Criteria API for querying entities
 
 - **Summary**
   - ORM is the broader concept of mapping objects to database tables and managing data using object-oriented techniques.
@@ -115,7 +116,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 - For `JpaRepository<T, ID>`
 
-Basic CRUD Operations
+#### Basic CRUD Operations
 
 1.  <S extends T> S save(S entity)
 
@@ -158,7 +159,7 @@ Basic CRUD Operations
 
 11. void deleteAll()
 
-Query Methods
+#### Query Methods
 
 1.  List<T> findBy<Attribute>(<Attribute> attribute)
 

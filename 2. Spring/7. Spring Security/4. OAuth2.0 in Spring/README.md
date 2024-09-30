@@ -9,7 +9,7 @@
 
 1. **Resources** are protected data that require OAuth to access them.
 
-### Roles:
+### Entities:
 
 1. User/Resource Owner:
 

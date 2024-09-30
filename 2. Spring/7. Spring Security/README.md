@@ -18,7 +18,9 @@ Spring Security is a powerful and customizable framework for securing Java appli
 
 3. **Security Filters**:
 
-   - **Definition**: Filters that intercept HTTP requests to apply security measures before they reach the application.
+   - **Definition**: 
+      - A chain of filters for handling security, such as login, logout, and access control.
+      - Filters that intercept HTTP requests to apply security measures before they reach the application.
    - **Examples**: Authentication filter, authorization filter, CSRF protection filter.
 
 4. **Security Context**:
@@ -29,6 +31,21 @@ Spring Security is a powerful and customizable framework for securing Java appli
 5. **Password Encoding**:
    - **Definition**: Mechanism to encode passwords for secure storage.
    - **Examples**: BCrypt, PBKDF2.
+
+6. **CSRF Protection**: Protects against Cross-Site Request Forgery attacks.
+
+7. **Session Management**: Manages user sessions securely.
+
+## Installation
+
+If you’re using **Spring Boot**, Spring Security can be added to your project by including the following dependency in your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
 
 ### 2. Configuring Spring Security
 

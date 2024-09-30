@@ -9,7 +9,7 @@
 
 ### Key Points
 
-- **Definition**: The `@Autowired` annotation marks a field, setter method, or constructor for dependency injection. Spring will automatically inject the appropriate bean by type.
+- **Definition**: The `@Autowired` annotation marks a field, setter method, or constructor for automatic dependency injection. Spring will automatically inject the appropriate bean by type.
 - **Dependency Injection**: `@Autowired` supports constructor injection, setter injection, and field injection.
 - **Required Attribute**: By default, `@Autowired` is required. You can make it optional by setting the `required` attribute to `false`, in which case, Spring will inject `null` if no matching bean is found.
 
@@ -126,7 +126,7 @@ The `@Autowired` annotation simplifies dependency injection by allowing Spring t
 
 4. What happens if `@Autowired` cannot find a suitable bean to inject?
 
-   - If `@Autowired` cannot find a suitable bean to inject and required is set to true (which is the default), Spring will throw a NoSuchBeanDefinitionException during application context initialization.
+   - If `@Autowired` cannot find a suitable bean to inject and required is set to true (which is the default), Spring will throw a `NoSuchBeanDefinitionException` during application context initialization.
    - Handling Missing Beans:
      - Use `@Autowired(required=false)` or `@Nullable` to make the dependency optional.
      - Use `@Qualifier` to resolve ambiguity if there are multiple candidates.

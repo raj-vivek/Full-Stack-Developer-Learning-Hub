@@ -4,12 +4,6 @@
 
 The `@ComponentScan` annotation is used in Spring to specify the packages that should be scanned for Spring components. It is typically used along with the `@Configuration` annotation to define the base packages where Spring should look for annotated components such as `@Component`, `@Service`, `@Repository`, and `@Controller`.
 
-### Key Points
-
-- **Definition**: `@ComponentScan` tells Spring where to search for components to register as beans. It helps in automatic detection of beans based on classpath scanning.
-- **Usage**: It is commonly used in configuration classes to specify which packages to scan for Spring-managed components.
-- **Base Packages**: You can define base packages explicitly or use base packages patterns to narrow down the scan.
-
 ### Example
 
 ```java
@@ -25,7 +19,7 @@ public class AppConfig {
 
 - In this example:
 
-  - @ComponentScan is used to specify that Spring should scan the com.example.myapp package for components.
+  - @ComponentScan is used to specify that Spring should scan the `com.example.myapp` package for components.
   - Classes in this package annotated with `@Component`, `@Service`, `@Repository`, or `@Controller` will be detected and registered as beans.
 
 - Use Cases

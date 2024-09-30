@@ -1,6 +1,72 @@
-# Spring @Qualifier Annotation
+# @Primary and @Qualifier Annotation
 
-## Theory
+## @Primary Annotation
+
+- In Spring Framework, when multiple beans of the same type are available, the `@Primary` annotation is used to indicate which bean should be given preference when autowiring.
+- It acts as a default bean and resolves the ambiguity when more than one bean is eligible for injection.
+- The `@Primary` annotation is applied on a bean definition. When Spring encounters multiple beans of the same type, it will choose the one marked with `@Primary` for injection.
+
+### Example
+
+1. Java-Based Configuration
+
+   - In Java-based configuration, `@Primary` is used to define which bean should be injected when multiple beans of the same type are available.
+
+     ```java
+     @Configuration
+     public class AppConfig {
+
+         @Bean
+         @Primary
+         public DataSource primaryDataSource() {
+             return new HikariDataSource(); // Primary DataSource
+         }
+
+         @Bean
+         public DataSource secondaryDataSource() {
+             return new BasicDataSource(); // Secondary DataSource
+         }
+     }
+     ```
+
+   - In this example, when a DataSource bean is required and there is no specific qualifier, Spring will inject the `primaryDataSource()` bean because it is marked with `@Primary`.
+
+2. Annotation-Based Configuration
+
+   - In annotation-based configuration, `@Primary` can be used directly on component classes to designate them as the preferred bean.
+
+     ```java
+     @Component
+     @Primary
+     public class PrimaryDataSource implements DataSource {
+         // Implementation details
+     }
+
+     @Component
+     public class SecondaryDataSource implements DataSource {
+         // Implementation details
+     }
+     ```
+
+   - In this example, PrimaryDataSource is marked with @Primary, so it will be injected when a DataSource bean is required, unless a specific qualifier is provided.
+
+### Primary vs @Qualifier
+
+While `@Primary` defines a default bean to be used when no specific bean is specified, the `@Qualifier` annotation is used to narrow down the selection by explicitly specifying which bean to inject.
+
+### Combining @Primary and @Qualifier
+
+Even with a `@Primary` bean, you can still use `@Qualifier` to inject a non-primary bean when necessary. The `@Primary` serves as a default fallback when no `@Qualifier` is provided.
+
+### Conclusion
+
+The `@Primary` annotation provides a convenient way to resolve bean conflicts when multiple beans of the same type exist.
+The `@Qualifier` annotation gives precise control over which bean to inject, even when a primary bean exists.
+Both annotations can be used together to manage dependency injection effectively in Spring applications.
+
+---
+
+## @Qualifier Annotation
 
 - The `@Qualifier` annotation in Spring is used to resolve ambiguity when multiple beans of the same type are present in the Spring context.
 - It works in conjunction with `@Autowired` to specify which bean should be injected when there are multiple candidates.
@@ -15,11 +81,19 @@
 
 ### Example
 
+#### Using @Qualifier
+
+     ```java
+     @Autowired
+     @Qualifier("specificBean")
+     private MyService myService;
+     ```
+
 #### Naming the Bean for Qualifier
 
 1. **Annotation-based configuration (Component Scanning)**:
 
-   1. Default Bean Naming with @Component (and stereotype annotations like @Service, @Repository, etc.)
+   1. Default Bean Naming with @Component (and @Service, @Repository, etc.)
 
       - Spring takes the simple name of the class, changes the first letter to lowercase, and uses the resulting value to name the bean.
       - Example: A class `DemoBean` annotated with `@Component` and is named "demoBean".
@@ -56,7 +130,7 @@
         }
         ```
 
-      - Here, the bean will be named "someDependency", and you can use `@Qualifier("someDependency")` to refer to it.
+      - Here, the bean will be named `someDependency`, and you can use `@Qualifier("someDependency")` to refer to it.
 
    2. Explicit Bean Naming using @Bean:
 
@@ -106,9 +180,11 @@
             private final MyRepository myRepository;
 
             @Autowired
-            public MyService(@Qualifier("specificRepository") MyRepository myRepository) {
+            @Qualifier("specificRepository")
+            public MyService(MyRepository myRepository) {
                 this.myRepository = myRepository;
             }
+
         }
         ```
 

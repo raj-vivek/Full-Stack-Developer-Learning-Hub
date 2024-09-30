@@ -35,7 +35,7 @@ In Spring Boot, application properties are used to configure various aspects of 
 
 2. Java System Properties: Properties set via the -D flag on the command line (e.g., -Dserver.port=8081) come next in precedence.
 
-3. OS Environment Variables: Environment variables set at the operating system level are considered next. These can be accessed in Spring Boot using the SPRING\_ prefix (e.g., SPRING_SERVER_PORT=8081).
+3. OS Environment Variables: Environment variables set at the operating system level are considered next. These can be accessed in Spring Boot using the `SPRING_` prefix (e.g., `SPRING_SERVER_PORT=8081`).
 
 4. Application Properties Files: Configuration in properties files such as application.properties or application.yml is next. If there are multiple property files, Spring Boot loads them in the following order:
 

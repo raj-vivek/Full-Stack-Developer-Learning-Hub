@@ -1,16 +1,16 @@
 # Spring – Understanding Inversion of Control (IoC)
 
-## Theory
+## Introduction
 
 Inversion of Control (IoC) is a principle in software engineering by which the control of objects or portions of a program is transferred to a container or framework. In the Spring Framework, IoC is implemented through the use of Dependency Injection (DI). This allows for better modularity and easier testing of code by decoupling the execution of a task from its implementation.
 
-### Key Points
+## Key Points
 
 1. **Definition of IoC**:
 
    - Inversion of Control is a design principle in which the control flow of a program is inverted compared to traditional programming techniques.
-   - In traditional programming, objects are responsible for acquiring their dependencies. This is typically done using the new keyword to instantiate objects.
-   - In IoC, the control of object creation and dependency management is transferred from the objects themselves to a container or framework, like the Spring IoC container.
+   - In traditional programming, objects are responsible for acquiring their dependencies. This is typically done using the `new` keyword to instantiate objects.
+   - In IoC, the control of object creation and dependency management is transferred from the objects themselves to a container or framework, like the Spring IoC container (`ApplicationContext`).
    - Types of IoC Configuration:
      1. **Traditional XML-based Configuration**: The most verbose and now less commonly used.
      2. **Annotation-based Configuration**: Introduced simplicity and reduced the need for XML.
@@ -25,21 +25,21 @@ Inversion of Control (IoC) is a principle in software engineering by which the c
    - DI is a specific implementation of IoC.
    - It allows an object to receive other objects it depends on, rather than creating them directly.
    - Types of Dependency Injection:
-     1. Constructor Injection
-     2. Setter Injection
-     3. Field Injection
+     1. **Constructor Injection**
+     2. **Setter Injection**
+     3. **Field Injection**
 
 3. **Spring IoC Container**:
 
    - The IoC container is responsible for managing the lifecycle of Spring beans.
    - It uses configuration metadata, which can be provided through XML, Java annotations, or Java code, to know the objects it is supposed to instantiate, configure, and assemble.
    - There are 2 types of IoC containers:
-     1. BeanFactory
-     2. ApplicationContext
-   - The BeanFactory is the most basic version of IoC containers
-   - The ApplicationContext extends the features of BeanFactory.
+     1. `BeanFactory`
+     2. `ApplicationContext`
+   - The `BeanFactory` is the most basic version of IoC containers.
+   - The `ApplicationContext` extends the features of `BeanFactory`.
    - The followings are some of the main features of Spring IoC,
-     1. Creating Object for us
+     1. Creating objects for us
      2. Managing our objects
      3. Helping our application to be configurable
      4. Managing dependencies
@@ -129,75 +129,6 @@ Inversion of Control (IoC) is a principle in software engineering by which the c
 5. **Functional Style**: Introduced with Spring 5 for a more functional approach to configuration.
 6. **Kotlin-based Configuration**: Leverages Kotlin's concise syntax.
 7. **Reactive Programming**: Support for non-blocking, event-driven applications introduced in Spring 5.
-
-### Traditional XML-based Configuration
-
-1. Suppose we have one `interface` named `Sim` and it has some abstract methods `calling()` and `data()`.
-2. We have created another two classes `Airtel` and `Jio` which implement the Sim interface and override the interface methods.
-3. Let’s now call these methods inside the main method.
-
-   ```java
-    public static void main(String[] args)
-    {
-        Sim sim = new Jio();
-        sim.calling();
-        sim.data();
-    }
-   ```
-
-4. Now if we need to change to new Sim Vodafone, we need to change the source code like this -
-
-   ```java
-   Sim sim = new Vodafone();
-   ```
-
-5. But we don’t want to touch the source code of this. The source code should be constant.
-
-   - How to make it configurable without changing source code.
-   - Here Spring IoC comes into the picture.
-
-6. We can use `ApplicationContext` to implement an IoC container. First, we have to create an XML file and name the file as “beans.xml“.
-
-   - Example: beans.xml File
-
-     ```xml
-     <?xml version="1.0" encoding="UTF-8"?>
-     <beans xmlns="http://www.springframework.org/schema/beans"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://www.springframework.org/schema/beans
-         https://www.springframework.org/schema/beans/spring-beans.xsd">
-
-     <bean id="sim" class="Jio"></bean>
-
-     </beans>
-     ```
-
-7. Explanation: In the beans.xml file, we have created beans. So inside the id, we have to pass the unique id and inside the class, we have to pass the Class name for which you want to create the bean. Later on, inside the main method, we can tweek it out that is described in the below program.
-
-   ```java
-   import org.springframework.context.ApplicationContext;
-   import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-   public class Mobile {
-      public static void main(String[] args) {
-         // Using ApplicationContext tom implement Spring IoC
-         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
-
-         // Get the bean
-         Sim sim = applicationContext.getBean("sim", Sim.class);
-
-         sim.calling();
-         sim.data();
-      }
-   }
-   ```
-
-8. And now if you want to use the Airtel sim so you have to change only inside the beans.xml file. The main method is going to be the same.
-
-   ```xml
-   <bean id="sim" class="Airtel"></bean>
-
-   ```
 
 ### Use Cases
 
