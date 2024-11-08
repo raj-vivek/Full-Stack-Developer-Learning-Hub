@@ -16,34 +16,37 @@
 
 ### Dynamic Size
 
-- Initial Capacity
+#### Initial Capacity
 
-  - When you create an ArrayList without specifying an initial capacity, it defaults to an initial capacity of 10.
+- When you create an `ArrayList` without specifying an initial capacity, it defaults to an initial capacity of 10.
 
-- Growth Mechanism
+#### Growth Mechanism
 
-  - The default growth strategy in Java is to increase the size by 50%. Specifically, the new capacity is calculated as:
-    ```java
-    newCapacity = oldCapacity + (oldCapacity >> 1);
-    ```
-  - Here, oldCapacity >> 1 is a bitwise operation that effectively calculates half of the old capacity, thus increasing the capacity by 50%.
-  - Example:
-    - Initial capacity: 10
-    - After adding 11th element: capacity grows to 15 (10 + 5)
-    - After adding 16th element: capacity grows to 22 (15 + 7)
-    - After adding 23rd element: capacity grows to 33 (22 + 11)
+- The default growth strategy in Java is to increase the size by 50%. Specifically, the new capacity is calculated as:
+  ```java
+  newCapacity = oldCapacity + (oldCapacity >> 1);
+  ```
+- Here, oldCapacity >> 1 is a bitwise operation that effectively calculates half of the old capacity, thus increasing the capacity by 50%.
+- Example:
+  - Initial capacity: 10
+  - After adding 11th element: capacity grows to 15 (10 + 5)
+  - After adding 16th element: capacity grows to 22 (15 + 7)
+  - After adding 23rd element: capacity grows to 33 (22 + 11)
 
-- Internal Array Copy
-  - When the ArrayList grows, it creates a new array with the new capacity and copies the elements from the old array to the new one. This process involves the following steps:
-    1. A new array with the new capacity is created.
-    2. Elements from the old array are copied to the new array.
-    3. The old array is discarded, and the new array is used as the internal storage for the ArrayList.
-- Performance Considerations
-  - Amortized Time Complexity: Although resizing involves copying elements, which is an O(n) operation, this resizing doesn't happen frequently. The average time complexity for adding an element to an ArrayList is O(1), considering the amortized cost over many additions.
-  - Pre-sizing: If you know the number of elements in advance, you can specify the initial capacity to avoid the overhead of multiple resizings.
-    ```java
-        ArrayList<Integer> list = new ArrayList<>(100);
-    ```
+#### Internal Array Copy
+
+- When the ArrayList grows, it creates a new array with the new capacity and copies the elements from the old array to the new one. This process involves the following steps:
+  1. A new array with the new capacity is created.
+  2. Elements from the old array are copied to the new array.
+  3. The old array is discarded, and the new array is used as the internal storage for the ArrayList.
+
+#### Performance Considerations
+
+- Amortized Time Complexity: Although resizing involves copying elements, which is an O(n) operation, this resizing doesn't happen frequently. The average time complexity for adding an element to an ArrayList is O(1), considering the amortized cost over many additions.
+- Pre-sizing: If you know the number of elements in advance, you can specify the initial capacity to avoid the overhead of multiple resizings.
+  ```java
+      ArrayList<Integer> list = new ArrayList<>(100);
+  ```
 
 ### Key Methods in the ArrayList Class
 
@@ -60,3 +63,36 @@
 - **indexOf(Object o)**: Returns the index of the first occurrence of the specified element, or -1 if the list does not contain the element.
 - **iterator()**: Returns an iterator over the elements in the list in proper sequence.
 - **trimToSize()**: Trims the capacity of the ArrayList instance to be the list's current size.
+
+### Example
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Orange");
+        fruits.add("Banana");
+
+        Collections.addAll(fruits, "Mango", "Watermelon", "Pineapple");
+
+        System.out.println(fruits);
+
+        for(String fruit: fruits) {
+            System.out.println(fruit);
+        }
+
+        fruits.remove("Banana");
+
+        System.out.println(fruits);
+        System.out.println(fruits.size());
+
+        List<String> syncFruits = Collections.synchronizedList(fruits);
+        System.out.println(syncFruits);
+    }
+}
+```

@@ -1,33 +1,35 @@
 # Lambda Expression in Java
 
-### Definition
+## Definition
 
 - A lambda expression is essentially an anonymous function, i.e., a function without a name and a modifier.
 - It provides a clear and concise way to implement the Single Abstract Method (SAM) of Functional interfaces using an expression.
-- They are a significant feature for functional programming in Java, enabling developers to write more readable and maintainable code.
-- It allows you to pass methods as arguments to other methods (a feature that was previously supported using an interface with a single method, also known as a functional interface).
+- They are a significant feature for functional programming in Java.
+- It allows you to pass methods as arguments to other methods.
 
-### Key Concepts
+## Key Concepts
 
-1. **Functional programming**:
+### 1. **Functional programming**:
 
-   - It is a declarative programming paradigm style where one uses pure functions in sequence to solve complex problems. We try to bind everything in pure mathematical functions style.
+- It is a declarative programming paradigm style where one uses pure functions in sequence to solve complex problems. We try to bind everything in pure mathematical functions style.
 
-2. **Pure functions**: These functions have two main properties.
+### 2. **Pure functions**:
 
-- First, they always produce the same output for same arguments irrespective of anything else.
-- Secondly, they have no side-effects i.e. they do not modify any arguments or local/global variables or input/output streams.
+- These functions have two main properties.
+  1. They always produce the same output for same arguments irrespective of anything else.
+  2. They have no side-effects i.e. they do not modify any arguments or local/global variables or input/output streams.
 
-3. **First-Class and Higher-Order Functions**:
+### 3. **First-Class and Higher-Order Functions**:
 
-   - Functions are first-class citizens in functional programming. They can be assigned to variables, passed as arguments to other functions, and returned from other functions.
-   - Higher-order functions are functions that take other functions as arguments or return them as results.
+- Functions are first-class citizens in functional programming. They can be assigned to variables, passed as arguments to other functions, and returned from other functions.
+- Higher-order functions are functions that take other functions as arguments or return them as results.
 
-4. **Declarative Style**:
-   - Functional programming focuses on what to do rather than how to do it.
-   - This is in contrast to Imperative programming, which focuses on how to achieve a result.
+### 4. **Declarative Style**:
 
-### Key Points
+- Functional programming focuses on what to do rather than how to do it.
+- This is in contrast to Imperative programming, which focuses on how to achieve a result.
+
+## Key Points
 
 1. **Syntax**:
 

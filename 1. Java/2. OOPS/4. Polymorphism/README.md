@@ -71,3 +71,5 @@ Question: How can you use bounded wildcards to restrict the types of objects tha
 ### 5. Polymorphism and Generics
 
 Question: How can you combine polymorphism and generics to create more flexible and reusable code?
+
+### 6. Can static methods be overriden?

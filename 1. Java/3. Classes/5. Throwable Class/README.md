@@ -59,3 +59,26 @@
 - **Custom Exceptions**: Creating user-defined exceptions to handle specific conditions.
 - **Debugging**: Using stack trace information to debug runtime issues.
 - **Propagation of Exceptions**: Chaining exceptions to propagate errors up the call stack.
+
+### Example
+
+```java
+public class ThrowableClassExample {
+    public static void main(String[] args) throws Throwable {
+        try {
+            // Throwing custom exception
+            throw new CustomException("This is a custom exception");
+        } catch (CustomException e) {
+            // Handling custom exception
+            System.out.println("Caught CustomException: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
+
+class CustomException extends Exception {
+    public CustomException(String message) {
+        super(message);
+    }
+}
+```

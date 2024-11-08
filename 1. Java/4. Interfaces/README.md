@@ -55,3 +55,62 @@
 5. Inside the Interface, constructors are not allowed.
 6. Inside the interface main method is not allowed.
 7. When you create an object of a child class using a reference of the parent interface or abstract class, you can only call the methods declared in the parent interface or abstract class. You cannot call methods that are defined only in the child class unless you cast the reference to the child class type.
+
+### Example
+
+```java
+public class InterfaceExample {
+    public static void main(String[] args) {
+        MyClass myClass = new MyClass();
+
+        myClass.abstractMethod();
+        myClass.secondAbstractMethod();
+        myClass.defaultMthod();
+
+        MyInterface.staticMethod();
+
+        System.out.println(MyInterface.CONSTANT);
+    }
+}
+
+interface MyInterface {
+    // public static final (by default)
+    int CONSTANT = 10;
+
+    void abstractMethod();
+
+    default void defaultMthod() {
+        System.out.println("This is a default method");
+        privateMethod();
+    };
+
+    static void staticMethod() {
+        System.out.println("This is a static method");
+        privateStaticMethod();
+    }
+
+    private void privateMethod() {
+        System.out.println("This is a private method");
+    }
+
+    private static void privateStaticMethod() {
+        System.out.println("This is a private static method");
+    }
+}
+
+abstract class MyAbstractClass implements MyInterface {
+    @Override
+    public void abstractMethod() {
+        System.out.println("Abstract method implementation in Abstract class");
+    }
+
+    public abstract void secondAbstractMethod();
+}
+
+class MyClass extends MyAbstractClass {
+    @Override
+    public void secondAbstractMethod() {
+        System.out.println("Second abstract method implementation in concrete class");
+    }
+}
+```

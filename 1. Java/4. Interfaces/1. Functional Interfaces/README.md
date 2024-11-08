@@ -94,30 +94,57 @@ Java provides several built-in functional interfaces in the `java.util.function`
 
 ### Examples
 
-1.
+1.  ```java
+    // Before Java 8, we had to create anonymous inner class objects or implement these interfaces.
 
-```java
-// Before Java 8, we had to create anonymous inner class objects or implement these interfaces.
-
-class Test {
-public static void main(String args[]) {
-  // create anonymous inner class object
-  new Thread(new Runnable() {
-    @Override public void run(){
-        System.out.println("New thread created");
+    class Test {
+    public static void main(String args[]) {
+      // create anonymous inner class object
+      new Thread(new Runnable() {
+        @Override public void run(){
+            System.out.println("New thread created");
+          }
+        }).start();
       }
-    }).start();
-  }
-}
+    }
 
-// Java 8 onwards, we can assign lambda expression to its functional interface object like this:
+    // Java 8 onwards, we can assign lambda expression to its functional interface object like this:
 
-class Test {
-public static void main(String args[]) {
-  // lambda expression to create the object
-  new Thread(() -> {
-      System.out.println("New thread created");
-    }).start();
-  }
-}
-```
+    class Test {
+    public static void main(String args[]) {
+      // lambda expression to create the object
+      new Thread(() -> {
+          System.out.println("New thread created");
+        }).start();
+      }
+    }
+    ```
+
+2.  ```java
+    public class FunctionalInterfaceExample {
+        public static void main(String[] args) {
+            // Implementing the functional interface using a lambda expression
+            MyFunctionalInterface funcInterface = (message) -> {
+                System.out.println("Message: " + message);
+            };
+
+            // Calling the abstract method
+            funcInterface.display("Hello, Functional Interfaces!");
+
+            // Calling the default method
+            funcInterface.defaultMethod();
+        }
+    }
+
+
+    @FunctionalInterface
+    interface MyFunctionalInterface {
+        // Single abstract method
+        void display(String message);
+
+        // Default method
+        default void defaultMethod() {
+            System.out.println("Default method in functional interface");
+        }
+    }
+    ```

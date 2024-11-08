@@ -18,7 +18,7 @@
 ### Key Properties
 
 1. **Capacity**: The number of elements that a HashMap can hold. `Default: 2^4=16`
-2. **Load factor**: It is the percent value of the capacity after which the capacity of Hashmap is to be increased (It is the percentage fill of buckets after which Rehashing takes place). `Default: 0.75f`
+2. **Load factor**: It is the percent value of the capacity after which Rehashing takes place (It is the percentage fill of buckets after which the capacity of Hashmap is to be increased). `Default: 0.75f`
 3. **Threshold** – It is the product of Load Factor and Initial Capacity. In java, by default, it is (16 \* 0.75 = 12). That is, Rehashing takes place after inserting 12 key-value pairs into the HashMap.
 4. **Rehashing** – It is the process of doubling the capacity of the HashMap after it reaches its Threshold. In java, HashMap continues to rehash(by default) in the following sequence – 2^4, 2^5, 2^6, 2^7, …. so on.
 
@@ -62,7 +62,7 @@
 
 ### Internal Data Structure
 
-- **Array and LinkedList**:
+- **Array and LinkedList/Self-balancing BST (red-black tree)**:
   - Internally, `HashMap` uses an array (not ArrayList) of `Node` objects (also called buckets).
   - A `Node` is represented as a class that contains 4 fields:
     - int hash
@@ -76,11 +76,8 @@
 
 #### 1. Hashing
 
-- Hashing is a process of converting an object into integer form by using the method hashCode() of the Key object.
-- It’s necessary to write the hashCode() method properly for better performance of HashMap.
-- Important methods:
-  1. hashCode() method
-  2. equals() method
+- Hashing is a process of converting an object into integer form by using the method `hashCode()` of the Key object.
+- It’s necessary to write the `hashCode()` and `equals()` method properly for correct and better performance of HashMap.
 
 #### 2. Buckets:
 
@@ -144,22 +141,25 @@
       ```
    4. Place this object at index 6 if no other object is presented there i.e the index in the `table` array is `null`.
    5. In this case, a node object is found at index 6 – this is a case of collision.
-   6. In that case, check via the hashCode() and equals() method if both the keys are the same.
+   6. In that case, check via the `hashCode()` and `equals()` method if both the keys are the same.
    7. If keys are the same, replace the value with the current value.
    8. Otherwise, connect this node object to the previous node object via linked list and both are stored at index
 
-4. Using the get() method
-   1. Calculate hash code of Key {“vaibhav”}. It will be generated as 118.
+4. Using the `get()` method
+   1. Calculate hash code of Key `{“vaibhav”}`. It will be generated as 118.
    2. Calculate index by using index method it will be 6.
-   3. Go to index 6 of the array and compare the first element’s key with the given key. If both are equals then return the value, otherwise, check for the next element if it exists.
-   4. In our case, it is not found as the first element and the next node object is not null.
-   5. If the next node is null then return null.
-   6. If the next of node is not null traverse to the second element and repeat process 3 until the key is not found or next is not null.
-   7. Time complexity is almost constant for the put and the get method until rehashing is not done.
-   8. In case of collision, i.e. index of two or more nodes are the same, nodes are joined by a link list i.e. the second node is referenced by the first node and the third by the second, and so on.
-   9. If the key given already exist in HashMap, the value is replaced with the new value.
-   10. hash code of the null key is 0.
-   11. When getting an object with its key, the linked list is traversed until the key matches or null is found on the next field.
+   3. Go to index 6 of the array and compare the first element’s key with the given key using `equals()`. If both are equal then return the value, otherwise, check for the next element if it exists.
+   4. In our case, it is not found as the first element, and the next node object is not null.
+   5. If the next node is `null` then return `null`.
+   6. If the next of node is not null traverse to the second element and repeat process 3, until the key is found or next is null.
+
+### Notes
+
+1.  Time complexity is almost constant for the put and the get method until rehashing is not done.
+2.  In case of collision, i.e. index of two or more nodes are the same, nodes are joined by a link list i.e. the second node is referenced by the first node and the third by the second, and so on.
+3.  If the key given already exist in HashMap, the value is replaced with the new value.
+4.  hash code of the null key is 0.
+5.  When getting an object with its key, the linked list is traversed until the key matches or null is found on the next field.
 
 ### Improving Hashmap Collision Handling
 
@@ -171,3 +171,35 @@
 
    - Ensure the hash function distributes keys uniformly across the hash table. Poor hash functions can lead to clustering of entries, increasing collisions.
    - Java’s `hashCode()` method can be overridden to improve hash distribution.
+   - **Hash Code Generation**
+     - `int Objects.hash(Object... values)`: Generates a hash code for a sequence of input values. This method is useful for implementing `Object.hashCode()` on objects containing multiple fields.
+
+### Example
+
+```java
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("Apple", 10);
+        map.put("Banana", 20);
+        map.put("Cherry", 30);
+
+        // Accessing elements
+        System.out.println("Value for key 'Apple': " + map.get("Apple"));
+
+        // Iterating over the map
+        for (String key : map.keySet()) {
+            System.out.println("Key: " + key + ", Value: " + map.get(key));
+        }
+
+        // Removing an element
+        map.remove("Banana");
+        System.out.println("After removal: " + map);
+
+        // Checking size
+        System.out.println("Size of the map: " + map.size());
+    }
+}
+```

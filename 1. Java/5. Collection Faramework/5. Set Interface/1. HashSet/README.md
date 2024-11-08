@@ -19,7 +19,7 @@
 
 - **HashMap**: Internally, `HashSet` uses a `HashMap` to store elements. Each element is stored as a key in the `HashMap`, with a constant dummy value.
 - **Dummy Value**
-  - The dummy value in the HashMap used by HashSet is a static final object, typically defined as follows:
+  - The dummy value in the `HashMap` used by `HashSet` is a static final object, typically defined as follows:
     ```java
     private static final Object PRESENT = new Object();
     ```
@@ -73,3 +73,40 @@
 1. Unique Collection: When a collection of unique elements is needed.
 2. Removing Duplicates: To remove duplicates from a collection.
 3. Membership Testing: Efficiently check if an element is part of the set.
+
+### Example
+
+```java
+import java.util.HashSet;
+
+public class HashSetExample {
+    public static void main(String[] args) {
+        HashSet<String> set = new HashSet<>();
+        
+        // Adding elements to the set
+        set.add("Apple");
+        set.add("Banana");
+        set.add("Cherry");
+        set.add("Apple"); // Duplicate element, will not be added
+
+        // Checking size
+        System.out.println("Size of the set: " + set.size()); // Output: 3
+
+        // Checking if an element exists
+        System.out.println("Does the set contain 'Banana'? " + set.contains("Banana")); // Output: true
+
+        // Removing an element
+        set.remove("Banana");
+        System.out.println("After removing 'Banana', set contains: " + set); // Output: [Apple, Cherry]
+
+        // Iterating over the set
+        for (String item : set) {
+            System.out.println("Item: " + item);
+        }
+
+        // Clearing the set
+        set.clear();
+        System.out.println("Is the set empty? " + set.isEmpty()); // Output: true
+    }
+}
+```

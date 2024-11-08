@@ -62,3 +62,49 @@
 #### Summary
 - Checked Exceptions: Use these for situations where the caller can reasonably be expected to handle the exception (e.g., FileNotFoundException, DataNotFoundException).
 - Runtime Exceptions: Use these for situations where the exception indicates a programming error or where handling is typically managed globally (e.g., UserNotAuthenticatedException, UnauthorizedException, InvalidCredentialsException).
+
+### Example
+
+```java
+public class ExceptionHandling {
+    public static void throwCheckedException() throws Exception {
+        throw new Exception("Checked Exception");
+    }
+
+    public static void throwUncheckedException() {
+        throw new RuntimeException("Unchecked Exception");
+    }
+
+    public static void main(String[] args) {
+        try {
+            throwCheckedException();
+        } catch (Exception e) {
+            System.out.println("Caught checked exception: " + e.getMessage());
+        } finally {
+            System.out.println("In finally block of checked exception");
+        }
+
+        try {
+            throwUncheckedException();
+        } catch (Exception e) {
+            System.out.println("Caught unchecked exception: " + e.getMessage());
+        } finally {
+            System.out.println("In finally block of unchecked exception");
+        }
+
+        try {
+            throw new CustomException("This is a custom exception");
+        } catch (Exception e) {
+            System.out.println("Caught exception: " + e.getMessage());
+        } finally {
+            System.out.println("In finally block of custom exception");
+        }
+    }
+}
+
+class CustomException extends Exception {
+    public CustomException(String message) {
+        super(message);
+    }
+}
+```

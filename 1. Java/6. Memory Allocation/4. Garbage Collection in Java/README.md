@@ -143,7 +143,7 @@ Notes -
 
 4. **G1 (Garbage-First) Garbage Collector**:
    - **Definition**: A GC designed for applications with large heaps and high-throughput requirements.
-   - **Characteristics**: Divides the heap into regions and performs GC in a manner that aims to prioritize and minimize pause times.
+   - **Characteristics**: Divides the heap into regions and performs GC in a manner that aims to provide high throughput and predictable pause times, minimizing pause times.
 
 ### 8. Garbage Collection Tuning
 

@@ -29,7 +29,7 @@
    ```
 2. **Max Heap**: Use `Collections.reverseOrder()` or a custom Comparator implementation for creating Max heap.
    ```java
-   PriorityQueue<Integer> pQueue = new PriorityQueue<Integer>(Collections.reverseOrder());
+   PriorityQueue<Integer> pQueue = new PriorityQueue<Integer>(Comparator.reverseOrder());
    ```
 
 ### Constructors
@@ -66,3 +66,34 @@
 2. Dijkstra's Algorithm: Often used in graph algorithms like Dijkstra's shortest path algorithm.
 3. Huffman Coding: Used in implementing Huffman coding for data compression.
 4. Event Simulation: Suitable for handling events that are processed in priority order.
+
+### Example
+
+```java
+import java.util.PriorityQueue;
+
+public class PriorityQueueExample {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.add(10);
+        pq.add(20);
+        pq.add(15);
+
+        // Accessing elements
+        System.out.println("Head of the queue: " + pq.peek());
+
+        // Iterating over the priority queue
+        System.out.println("Elements in the priority queue:");
+        for (Integer element : pq) {
+            System.out.println(element);
+        }
+
+        // Removing elements
+        System.out.println("Removed element: " + pq.poll());
+        System.out.println("Priority queue after removal: " + pq);
+
+        // Accessing elements
+        System.out.println("Head of the queue: " + pq.peek());
+    }
+}
+```

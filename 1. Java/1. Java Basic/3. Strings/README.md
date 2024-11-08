@@ -54,7 +54,7 @@ Returns the character at the specified index.
 char ch = str.charAt(1);  // 'e'
 ```
 
-### 3.3. substring(int startIndex, int endIndex)
+### 3.3. substring(int startIndex, int endIndexExcluded)
 
 Returns a substring from the string.
 
