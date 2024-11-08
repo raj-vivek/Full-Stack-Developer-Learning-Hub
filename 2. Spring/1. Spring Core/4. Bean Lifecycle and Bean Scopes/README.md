@@ -28,7 +28,7 @@
 
 - To execute custom code during the bean lifecycle, you can use -
 
-1. **XML Configuration**
+1. **XML Configuration**: Legacy (Note Recommended)
 
 2. **Annotation Configuration**:
 
@@ -70,7 +70,7 @@
    - Implement `InitializingBean` and `DisposableBean` interfaces:
 
      1. `InitializingBean` provides `afterPropertiesSet()` for custom initialization.
-     2. `DisposableBean` provides `destroy()` for custon destruction.
+     2. `DisposableBean` provides `destroy()` for custom destruction.
 
    - These methods can be overridden to include custom initialization and destruction logic.
 
@@ -102,9 +102,9 @@
 
 ### Use Cases of Bean LifeCycle
 
-1.  Resource Management: Initialize resources like database connections or file handlers.
-    Application Startup: Set up required configurations or data at the start of the application.
-2.  Resource Cleanup: Release resources or perform cleanup tasks before the application shuts down.
+1. Resource Management: Initialize resources like database connections or file handlers.
+2. Application Startup: Set up required configurations or data at the start of the application.
+3. Resource Cleanup: Release resources or perform cleanup tasks before the application shuts down.
 
 ## Bean Scopes:
 
@@ -155,115 +155,31 @@ For Web-aware Spring `ApplicationContext` -
      <bean id="myPrototypeBean" class="com.example.MyPrototypeBean" scope="prototype" />
      ```
 
-2. Annotation and Programatic Configuration:
+1. Annotation Configuration:
+
    - Using `@Scope`
    - Scope keywords: `singleton`, `prototype`, `request`, `session`, `globalSession`
-   - Example:
-     1. Annotation Configuration
-        ```java
-         @Component
-         @Scope("prototype")
-         public class MyPrototypeBean {
-             // Bean definition
-         }
-        ```
-     2. Programatic Configuration
-        ```java
-        @Configuration
-        public class AppConfig {
-            @Bean
-            @Scope("prototype")
-            public MyPrototypeBean myPrototypeBean() {
-                return new MyPrototypeBean();
-            }
-        }
-        ```
-
-### Custom Bean Scope
-
-While Spring provides several built-in scopes such as singleton, prototype, request, session, and globalSession, you may occasionally need to define custom scopes to suit specific requirements.
-
-#### Creating a Custom Scope:
-
-- To define a custom bean scope, you need to implement the `Scope` interface and register it with the Spring container.
-- Example:
-
-  ```java
-  import org.springframework.beans.factory.ObjectFactory;
-  import org.springframework.beans.factory.config.Scope;
-
-  import java.util.Map;
-  import java.util.concurrent.ConcurrentHashMap;
-
-  public class CustomScope implements Scope {
-      private final Map<String, Object> beans = new ConcurrentHashMap<>();
-
-      @Override
-      public Object get(String name, ObjectFactory<?> objectFactory) {
-          return beans.computeIfAbsent(name, key -> objectFactory.getObject());
-      }
-
-      @Override
-      public Object remove(String name) {
-          return beans.remove(name);
-      }
-
-      @Override
-      public void registerDestructionCallback(String name, Runnable callback) {
-          // Custom destruction logic if needed
-      }
-
-      @Override
-      public Object resolveContextualObject(String key) {
-          return null;
-      }
-
-      @Override
-      public String getConversationId() {
-          return "customScope";
-      }
-  }
-  ```
-
-3. **Registering the Custom Scope**:
-
-   - Register the custom scope with the Spring container in a configuration class.
-   - Example:
-
      ```java
-     import org.springframework.context.annotation.Bean;
-     import org.springframework.context.annotation.Configuration;
-     import org.springframework.context.support.SimpleThreadScope;
-
-     @Configuration
-     public class AppConfig {
-         @Bean
-         public CustomScope customScope() {
-             return new CustomScope();
-         }
-
-         @Bean
-         public CustomScopeConfigurer customScopeConfigurer() {
-             CustomScopeConfigurer configurer = new CustomScopeConfigurer();
-             configurer.setScopes(Map.of("customScope", customScope()));
-             return configurer;
-         }
+     @Component
+     @Scope("prototype")
+     public class MyPrototypeBean {
+         // Bean definition
      }
      ```
 
-4. **Using the Custom Scope**:
+1. Programatic Configuration
 
-   - Annotate beans with `@Scope` to use the custom scope.
-   - Example:
+   - Using `@Scope`
+   - Scope keywords: `singleton`, `prototype`, `request`, `session`, `globalSession`
 
      ```java
-     import org.springframework.context.annotation.Scope;
-     import org.springframework.stereotype.Component;
-
-     @Component
-     @Scope("customScope")
-     public class MyBean {
-         // Bean implementation
+     @Configuration
+     public class AppConfig {
+         @Bean
+         @Scope("prototype")
+         public MyPrototypeBean myPrototypeBean() {
+             return new MyPrototypeBean();
+         }
      }
      ```
 
@@ -280,14 +196,6 @@ While Spring provides several built-in scopes such as singleton, prototype, requ
 - **Custom Lifecycle Management**: When built-in scopes do not fit the application's requirements.
 - **Complex State Management**: Managing bean states that require custom logic beyond standard scopes.
 - **Multi-Tenant Applications**: Implementing scopes to manage beans differently for each tenant.
-
-### Summary
-
-- The Bean Life Cycle in Spring involves the creation, initialization, usage, and destruction of beans. It can be customized through initialization and destruction methods, and is influenced by the bean's scope. Understanding the lifecycle helps manage resources effectively and perform necessary setup and teardown operations.
-
-- Bean scopes in Spring define the lifecycle and visibility of beans, with options for singleton (one instance per application), prototype (new instance per request), request (new instance per HTTP request), session (new instance per HTTP session), and global session (new instance per global session in portlet applications).
-
-- Custom bean scopes in Spring allow for advanced lifecycle and visibility management of beans beyond the built-in scopes. By implementing the `Scope` interface and registering it with the Spring container, you can define and use scopes tailored to specific application needs.
 
 ### Questions
 

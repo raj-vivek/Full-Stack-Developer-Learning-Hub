@@ -20,15 +20,15 @@ Spring Stereotype Annotations are used to mark a class as a Spring-managed compo
 
 ### 2. @Service Annotation
 
-- **Definition**: @Service is a specialization of @Component used to mark a class as a service layer component. It indicates that the class performs service tasks or business logic.
+- **Definition**: `@Service` is a specialization of @Component used to mark a class as a service layer component. It indicates that the class performs service tasks or business logic.
 
 ### 3. @Repository Annotation
 
-- **Definition**: @Repository is a specialization of @Component used to mark a class as a Data Access Object (DAO) or repository component. It is typically used in the persistence layer and indicates that the class is responsible for data access and manipulation.
+- **Definition**: `@Repository` is a specialization of @Component used to mark a class as a Data Access Object (DAO) or repository component. It is typically used in the persistence layer and indicates that the class is responsible for data access and manipulation.
 
 ### 4. @Controller Annotation
 
-- **Definition**: @Controller is a specialization of @Component used to mark a class as a Spring MVC controller. It indicates that the class is responsible for handling web requests and returning views.
+- **Definition**: `@Controller` is a specialization of @Component used to mark a class as a Spring MVC controller. It indicates that the class is responsible for handling web requests and returning views.
 
 ### 5. @RestController
 - `@Controller` + `@ResponseBody`
@@ -36,14 +36,10 @@ Spring Stereotype Annotations are used to mark a class as a Spring-managed compo
 
 ### Use Cases
 
-1. @Component: Used for general-purpose components that do not fit into any specific layer or role.
-2. @Service: Applied to service classes where business logic is implemented.
-3. @Repository: Applied to DAO classes responsible for data access and persistence operations.
-4. @Controller: Applied to MVC controllers handling web requests and responses.
-
-### Summary
-
-Spring Stereotype Annotations help define the role and layer of components within a Spring application. By using these annotations, developers can leverage automatic component scanning and bean management, ensuring a clean and well-organized application structure.
+1. `@Component`: Used for general-purpose components that do not fit into any specific layer or role.
+2. `@Service`: Applied to service classes where business logic is implemented.
+3. `@Repositor`y: Applied to DAO classes responsible for data access and persistence operations.
+4. `@Controller`, `@RestController`: Applied to MVC controllers handling web requests and responses.
 
 ### Questions
 

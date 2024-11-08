@@ -2,7 +2,8 @@
 
 ## Introduction
 
-Dependency Injection (DI) is a design pattern used to implement Inversion of Control (IoC), allowing a class's dependencies to be injected externally rather than the class creating them itself. This promotes loose coupling and enhances testability and maintainability. In the Spring Framework, DI is a core concept and can be implemented through various methods.
+- Dependency Injection (DI) is a design pattern used to implement Inversion of Control (IoC), allowing a class's dependencies to be injected externally rather than the class creating them itself. 
+- This promotes loose coupling and enhances testability and maintainability. And also reuse of objects.
 
 ### Key Points
 
@@ -67,7 +68,6 @@ Dependency Injection (DI) is a design pattern used to implement Inversion of Con
 
 5. **Configuration Metadata**:
 
-   - Spring uses configuration metadata to know the objects to be managed and how they should be configured and assembled.
    - Configuration can be provided through XML files, Java annotations, or Java configuration classes.
 
 6. **Bean Scopes**:
@@ -147,7 +147,6 @@ Dependency Injection (DI) is a design pattern used to implement Inversion of Con
 
 4. **Spring Boot and Auto-configuration**:
    - Simplified setup and provided sensible defaults.
-   - Spring Boot, introduced with Spring 4.x.
    - Simplifies the setup by using conventions and auto-configuration.
    - Example:
      ```java

@@ -1,11 +1,9 @@
 # Exception Handling in Spring Boot
 
-## Theory
-
 - Exception handling in Spring Boot is a crucial aspect of building robust and user-friendly applications.
 - Spring Boot provides various ways to manage and handle exceptions that occur during the execution of your application, ensuring that errors are properly managed and meaningful responses are returned to the client.
 
-### Key Points
+## Key Points
 
 1. **Global Exception Handling**:
 
@@ -27,9 +25,9 @@
    - Use `@Valid` and `@NotNull` annotations in your controller methods to validate input data.
    - Handle validation errors using `BindingResult` or `@ExceptionHandler` in your `@ControllerAdvice` class.
 
-### Example
+## Example
 
-#### `ControllerAdvice` Class
+### `ControllerAdvice` Class
 
 ```java
 import org.springframework.http.HttpStatus;
@@ -58,7 +56,7 @@ public class GlobalExceptionHandler {
 
 - Since we are already specifying the status code in `ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND)`, the `@ResponseStatus(HttpStatus.NOT_FOUND)` annotation becomes redundant.
 
-#### Custom Exception Class
+### Custom Exception Class
 
 ```java
 public class ResourceNotFoundException extends RuntimeException {
@@ -68,7 +66,7 @@ public class ResourceNotFoundException extends RuntimeException {
 }
 ```
 
-### Steps:
+## Steps:
 
 1. Create a CustomException class by extending `RuntimeException` or `Exception` class.
 1. Create a Custom Error Response class that would be sent back by the controller in case of an exception.
@@ -77,17 +75,17 @@ public class ResourceNotFoundException extends RuntimeException {
    1. `@RestController` (Not Recommended)
    2. `@ControllerAdvice public class GlobalExceptionHandler`
 
-### Use Cases
+## Use Cases
 
 1. Global Exception Handling: Centralize exception handling logic to manage errors consistently across your application.
 2. REST APIs: Handle errors and return meaningful HTTP status codes and error messages to clients.
 3. Custom Exceptions: Create and handle application-specific exceptions to manage unique error scenarios.
 
-### Summary
+## Summary
 
 Exception handling in Spring Boot allows you to manage errors effectively and provide meaningful responses to clients. By using `@ControllerAdvice`, `@ExceptionHandler`, and custom exception classes, you can handle exceptions globally and ensure a robust and user-friendly application.
 
-### Questions
+## Questions
 
 1. What is the purpose of @ControllerAdvice in Spring Boot exception handling?
 2. How do you define a custom exception in Spring Boot?

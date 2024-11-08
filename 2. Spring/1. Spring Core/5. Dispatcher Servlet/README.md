@@ -1,26 +1,26 @@
 # Dispatcher Servlet
 
-- The DispatcherServlet is a core component of the Spring Framework, specifically within the Spring MVC (Model-View-Controller) module.
-- All HTTP requests are strictly routed through the DispatcherServlet.
+- The `DispatcherServlet` is a core component of the Spring Framework, specifically within the Spring MVC (Model-View-Controller) module.
+- All HTTP requests are strictly routed through the `DispatcherServlet`.
 - This servlet acts as the front controller, handling and delegating incoming requests to the appropriate controllers and handlers.
 
 ### DispatcherServlet Overview
 
 1. **Central Dispatcher**:
 
-   - The DispatcherServlet is the front controller in the Spring MVC framework.
+   - The `DispatcherServlet` is the front controller in the Spring MVC framework.
    - It acts as a central dispatcher for handling HTTP requests, routing them to appropriate handlers/controllers, and returning the responses.
 
 2. **Request Handling**:
 
-   - When a client makes an HTTP request, the DispatcherServlet intercepts it.
+   - When a client makes an HTTP request, the `DispatcherServlet` intercepts it.
    - It consults the handler mapping to find the appropriate controller.
    - It then delegates the request to the controller and processes the response.
 
 3. **Processing Workflow**:
-   - **Request Mapping**: DispatcherServlet uses handler mappings to route requests to the correct controller method.
+   - **Request Mapping**: `DispatcherServlet` uses handler mappings to route requests to the correct controller method.
    - **Controller Invocation**: The chosen controller processes the request and generates a `ModelAndView` object or an JSON API response.
-   - **View Resolution**: The DispatcherServlet uses view resolvers to determine the view (usually a JSP, Thymeleaf template, or other view technology) that should be used to render the response.
+   - **View Resolution**: The `DispatcherServlet` uses view resolvers to determine the view (usually a JSP, Thymeleaf template, or other view technology) that should be used to render the response.
    - **Response Rendering**: The view is rendered, and the final response is sent back to the client.
 
 ### Key Components Integrated with DispatcherServlet
@@ -37,7 +37,7 @@
 
 ### Configuration
 
-- The DispatcherServlet is configured in the web.xml file (in traditional Spring MVC applications) or through Java configuration in newer applications:
+- The `DispatcherServlet` is configured in the `web.xml` file (in traditional Spring MVC applications) or through Java configuration in newer applications:
 
 #### Java Configuration (Using Spring Boot or Spring Framework's Java Config):
 

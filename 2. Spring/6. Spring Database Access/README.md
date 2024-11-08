@@ -1,7 +1,5 @@
 # Spring Database Access
 
-## Overview
-
 - Spring provides a set of tools and abstractions for managing data access and persistence in Spring applications.
 - This includes integration with various data access technologies, simplifying database operations, and abstracting away boilerplate code.
 - Key components include Hibernate and Spring Data JPA.
@@ -189,7 +187,7 @@ public class UserRepository {
 2. Transaction Management:
 
 - Hibernate: Transactions are handled manually with `session.beginTransaction()` and session.`getTransaction().commit()`.
-- Spring Hibernate: Transactions are managed using @Transactional, allowing declarative transaction control.
+- Spring Hibernate: Transactions are managed using `@Transactional`, allowing declarative transaction control.
 
 <!--
 ### Steps:
@@ -303,8 +301,8 @@ JPA (Java Persistence API) is a specification that standardizes ORM-based databa
 
 Spring abstracts a lot of the manual configuration, so developers typically interact with JPA's EntityManager interface but rely on Spring for configuration and transaction management.
 
-1. EntityManagerFactory: In a Spring application, EntityManagerFactory is managed by Spring, and you don’t need to manually configure it. Spring will inject it as a bean wherever required.
-2. EntityManager: In a Spring Hibernate application, EntityManager is typically injected or created by Spring through dependency injection. You can then use it in your repository to interact with the database.
+1. `EntityManagerFactory`: In a Spring application, `EntityManagerFactory` is managed by Spring, and you don’t need to manually configure it. Spring will inject it as a bean wherever required.
+2. `EntityManager`: In a Spring Hibernate application, `EntityManager` is typically injected or created by Spring through dependency injection. You can then use it in your repository to interact with the database.
 
 ### Why is Hibernate Both ORM and JPA?
 

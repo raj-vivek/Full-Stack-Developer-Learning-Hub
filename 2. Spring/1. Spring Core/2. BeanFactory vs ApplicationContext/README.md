@@ -2,7 +2,9 @@
 
 ## Introduction
 
-In the Spring Framework, `BeanFactory` and `ApplicationContext` are two interfaces that define the IoC container. They are responsible for instantiating, configuring, and assembling beans. While they share some common functionalities, `ApplicationContext` provides more advanced features compared to `BeanFactory`.
+- In the Spring Framework, `BeanFactory` and `ApplicationContext` are two interfaces that define the IoC container.
+- They are responsible for instantiating, configuring, and assembling beans.
+- `ApplicationContext` provides more advanced features compared to `BeanFactory`.
 
 ## Key Points
 
@@ -28,7 +30,7 @@ In the Spring Framework, `BeanFactory` and `ApplicationContext` are two interfac
   - `ApplicationContext`: Eager initialization (all singleton beans are created at startup).
 - **Features**:
   - `BeanFactory`: Basic DI container.
-  - `ApplicationContext`: Advanced container with additional features like event handling, internationalization, etc.
+  - `ApplicationContext`: Advanced container with additional features like event handling, internationalization, propagation, AOP, etc.
 - **Usage**:
   - `BeanFactory`: Suitable for lightweight, memory-constrained environments.
   - `ApplicationContext`: Preferred for most enterprise applications due to its comprehensive feature set.

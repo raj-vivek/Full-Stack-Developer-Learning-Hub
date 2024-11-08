@@ -34,11 +34,9 @@ Inversion of Control (IoC) is a principle in software engineering by which the c
    - The IoC container is responsible for managing the lifecycle of Spring beans.
    - It uses configuration metadata, which can be provided through XML, Java annotations, or Java code, to know the objects it is supposed to instantiate, configure, and assemble.
    - There are 2 types of IoC containers:
-     1. `BeanFactory`
-     2. `ApplicationContext`
-   - The `BeanFactory` is the most basic version of IoC containers.
-   - The `ApplicationContext` extends the features of `BeanFactory`.
-   - The followings are some of the main features of Spring IoC,
+     1. `BeanFactory` : Most basic version of IoC containers
+     2. `ApplicationContext` : Extends the features of `BeanFactory`.
+   - The followings are some of the main features of Spring IoC:
      1. Creating objects for us
      2. Managing our objects
      3. Helping our application to be configurable
@@ -51,7 +49,7 @@ Inversion of Control (IoC) is a principle in software engineering by which the c
    - **Reusability**: Promotes reuse of components.
 
 5. **Definition of bean**
-   - In Spring, the objects that form the backbone of your application and that are managed by the Spring IoC container are called beans.
+   - In Spring, the objects that are managed by the Spring IoC container are called beans.
    - A bean is an object that is instantiated, assembled, and otherwise managed by a Spring IoC container.
 
 ### Types of IoC Configuration
@@ -91,7 +89,7 @@ Inversion of Control (IoC) is a principle in software engineering by which the c
 3. **Java-based Configuration**: Brought type safety and the power of Java to configuration.
 
    - Introduced with Spring 3.0
-   - Uses `@Configuration` and `@Beam` Java classes to define the beans and their dependencies.
+   - Uses `@Configuration` and `@Bean` Java classes to define the beans and their dependencies.
    - Example:
 
      ```java

@@ -1,15 +1,12 @@
 # Spring Boot – Application Properties
 
-## Theory
-
 In Spring Boot, application properties are used to configure various aspects of your application, such as server settings, database connections, and custom configurations. These properties are typically defined in the `application.properties` or `application.yml` files located in the `src/main/resources` directory.
 
-### Key Points
+## Key Points
 
 1. **Application Properties File**:
 
-   - **`application.properties`**: A simple properties file where key-value pairs define configuration settings.
-   - **`application.yml`**: An alternative to `application.properties`, using YAML syntax for hierarchical data representation.
+   - `application.properties` or `application.yml`
 
 2. **Property Sources**:
 
@@ -29,20 +26,30 @@ In Spring Boot, application properties are used to configure various aspects of 
 5. **Configuration Binding**:
    - Spring Boot allows binding properties to configuration classes using `@ConfigurationProperties`. This provides type-safe access to configuration values.
 
-### Order of precedence for property resolution in Spring Boot:
+## Order of precedence for property resolution in Spring Boot:
 
-1. Command-Line Arguments: Properties provided as command-line arguments take the highest precedence. They are specified using the -- prefix (e.g., --server.port=8081).
+### 1. Command-Line Arguments:
 
-2. Java System Properties: Properties set via the -D flag on the command line (e.g., -Dserver.port=8081) come next in precedence.
+- Properties provided as command-line arguments take the highest precedence. They are specified using the -- prefix (e.g., --server.port=8081).
 
-3. OS Environment Variables: Environment variables set at the operating system level are considered next. These can be accessed in Spring Boot using the `SPRING_` prefix (e.g., `SPRING_SERVER_PORT=8081`).
+### 2. Java System Properties:
 
-4. Application Properties Files: Configuration in properties files such as application.properties or application.yml is next. If there are multiple property files, Spring Boot loads them in the following order:
+- Properties set via the -D flag on the command line (e.g., -Dserver.port=8081) come next in precedence.
 
-   - application.properties (or application.yml) in the src/main/resources directory.
-   - Profile-specific files, such as application-dev.properties or application-prod.yml, if profiles are active.
+### 3. OS Environment Variables:
 
-5. Default Values: Finally, default values defined within the code or in Spring Boot’s defaults are used if none of the above configurations provide a value.
+- Environment variables set at the operating system level are considered next. These can be accessed in Spring Boot using the `SPRING_` prefix (e.g., `SPRING_SERVER_PORT=8081`).
+
+### 4. Application Properties Files:
+
+- Configuration in properties files such as `application.properties` or `application.yml` is next. If there are multiple property files, Spring Boot loads them in the following order:
+
+  - `application.properties` (or `application.yml`) in the src/main/resources directory.
+  - Profile-specific files, such as `application-dev.properties` or `application-prod.yml`, if profiles are active.
+
+### 5. Default Values:
+
+- Finally, default values defined within the code or in Spring Boot’s defaults are used if none of the above configurations provide a value.
 
 #### Example of Property Resolution:
 
@@ -55,17 +62,9 @@ Suppose you have the following configurations:
 
 In this case, Spring Boot will use 8081 as the server port because command-line arguments have the highest precedence.
 
-#### How It Works:
+## Example
 
-1. Command-Line Arguments: Highest priority, always overrides other configurations.
-2. Java System Properties: Overrides environment variables and properties files.
-3. OS Environment Variables: Override properties in files but are overridden by system properties.
-4. Application Properties Files: Properties defined in files are overridden by higher-priority sources.
-5. Default Values: Used if none of the other sources provide a value.
-
-### Example
-
-#### `application.properties`
+### `application.properties`
 
 ```properties
 # Server configuration
@@ -110,7 +109,7 @@ logging.file.name=app.log
 myapp.custom.property=value
 ```
 
-#### application.yml
+### application.yml
 
 ```yaml
 server:
@@ -135,32 +134,77 @@ myapp:
     property: value
 ```
 
-### Configuration Binding Example
+## Configuration Binding using @ConfigurationProperties
 
 - Spring Boot allows binding properties to configuration classes using `@ConfigurationProperties`. This provides type-safe access to configuration values.
 
-  ```java
-  import org.springframework.boot.context.properties.ConfigurationProperties;
-  import org.springframework.stereotype.Component;
+1. Annotation Usage:
 
-  @Component
-  @ConfigurationProperties(prefix = "myapp.custom")
-  public class CustomProperties {
+   - `@ConfigurationProperties` is placed on a class to indicate that it holds the properties.
+   - The `prefix` attribute is used to specify the property namespace.
 
-      private String property;
+2. Binding Process:
 
-      // Getters and setters
-      public String getProperty() {
-          return property;
-      }
+   - Spring Boot scans and maps properties from `application.properties` or `application.yml` to fields in the annotated class.
+   - Properties matching the prefix and field names are automatically bound to the class’s fields.
 
-      public void setProperty(String property) {
-          this.property = property;
-      }
-  }
-  ```
+3. Type Safety:
 
-### Use Cases
+   - The bound class can use Java's strong typing, ensuring proper handling of data types (e.g., `String`, `int`, `List`, `Map`).
+
+4. Key Points:
+
+   - `@ConfigurationProperties` vs `@Value`: `@ConfigurationProperties` is preferred for complex or hierarchical properties due to better type safety and flexibility compared to `@Value`.
+   - Validation: You can add @Validated on the class and use validation annotations (e.g., `@NotNull`, `@Min`) for field validation.
+
+### Example
+
+### Configuration Class:
+
+```java
+@Component
+@ConfigurationProperties(prefix = "app")
+public class AppProperties {
+    private String name;
+    private int timeout;
+    private List<String> servers;
+
+    // Getters and Setters
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public int getTimeout() { return timeout; }
+    public void setTimeout(int timeout) { this.timeout = timeout; }
+
+    public List<String> getServers() { return servers; }
+    public void setServers(List<String> servers) { this.servers = servers; }
+}
+```
+
+### application.properties or application.yml:
+
+```properties
+app.name=MyApp
+app.timeout=5000
+app.servers[0]=server1.example.com
+app.servers[1]=server2.example.com
+```
+
+### Enabling Configuration Binding:
+
+To enable `@ConfigurationProperties`, add the `@EnableConfigurationProperties` annotation to a configuration class or ensure the class itself is annotated with `@Component` or registered as a Spring bean.
+
+```java
+@SpringBootApplication
+@EnableConfigurationProperties(AppProperties.class)
+public class MyApp {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApp.class, args);
+    }
+}
+```
+
+## Use Cases
 
 1. Environment Configuration: Manage different settings for development, testing, and production environments.
 2. Database Settings: Configure database connections and credentials.
@@ -178,5 +222,5 @@ myapp:
 1. What are the primary ways to define application properties in Spring Boot?
 2. How can profiles be used to manage different configurations for various environments?
 3. Explain how to use application.properties and application.yml for configuring a Spring Boot application.
-4. How does Spring Boot's configuration binding work with @ConfigurationProperties?
+4. How does Spring Boot's configuration binding work with `@ConfigurationProperties`?
 5. What is the order of precedence for property sources in Spring Boot?

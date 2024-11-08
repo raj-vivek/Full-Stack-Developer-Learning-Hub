@@ -48,7 +48,7 @@
      }
      ```
 
-   - In this example, PrimaryDataSource is marked with @Primary, so it will be injected when a DataSource bean is required, unless a specific qualifier is provided.
+   - In this example, `PrimaryDataSource` is marked with `@Primary`, so it will be injected when a `DataSource` bean is required, unless a specific qualifier is provided.
 
 ### Primary vs @Qualifier
 
@@ -57,12 +57,6 @@ While `@Primary` defines a default bean to be used when no specific bean is spec
 ### Combining @Primary and @Qualifier
 
 Even with a `@Primary` bean, you can still use `@Qualifier` to inject a non-primary bean when necessary. The `@Primary` serves as a default fallback when no `@Qualifier` is provided.
-
-### Conclusion
-
-The `@Primary` annotation provides a convenient way to resolve bean conflicts when multiple beans of the same type exist.
-The `@Qualifier` annotation gives precise control over which bean to inject, even when a primary bean exists.
-Both annotations can be used together to manage dependency injection effectively in Spring applications.
 
 ---
 
@@ -75,25 +69,67 @@ Both annotations can be used together to manage dependency injection effectively
 ### Key Points
 
 - **Definition**: The `@Qualifier` annotation helps to disambiguate bean injection by specifying which bean to inject when multiple beans of the same type exist.
-- **Usage**: It is used alongside `@Autowired` to provide additional information about which bean should be injected.
-- **Scope**: It can be applied to fields, setter methods, and constructor parameters.
 - **Default Bean Naming**: Spring defaults to the lowercase version of the class name for bean names unless explicitly specified.
 
 ### Example
 
-#### Using @Qualifier
+#### 1. Field Injection
 
-     ```java
-     @Autowired
-     @Qualifier("specificBean")
-     private MyService myService;
-     ```
+Annotation-Based Configuration:
+
+    ```java
+    @Autowired
+    @Qualifier("specificBeanName")
+    private MyService myService;
+    ```
+
+#### 2. Setter Injection
+
+Annotation-Based Configuration:
+
+    ```java
+    @Autowired
+    public void setMyService(@Qualifier("specificBeanName") MyService myService) {
+        this.myService = myService;
+    }
+    ```
+
+Java-Based Configuration:
+
+    ```java
+    @Bean
+    public MyComponent myComponent(@Qualifier("specificBeanName") MyService myService) {
+        MyComponent component = new MyComponent();
+        component.setMyService(myService);
+        return component;
+    }
+    ```
+
+#### 3. Constructor Injection
+
+Annotation-Based Configuration:
+
+    ```java
+    @Autowired
+    public MyComponent(@Qualifier("specificBeanName") MyService myService) {
+        this.myService = myService;
+    }
+    ```
+
+Java-Based Configuration:
+
+    ```java
+    @Bean
+    public MyComponent myComponent(@Qualifier("specificBeanName") MyService myService) {
+        return new MyComponent(myService);
+    }
+    ```
 
 #### Naming the Bean for Qualifier
 
 1. **Annotation-based configuration (Component Scanning)**:
 
-   1. Default Bean Naming with @Component (and @Service, @Repository, etc.)
+   1. Default Bean Naming with `@Component` (and `@Service`, `@Repository`, etc.)
 
       - Spring takes the simple name of the class, changes the first letter to lowercase, and uses the resulting value to name the bean.
       - Example: A class `DemoBean` annotated with `@Component` and is named "demoBean".
@@ -159,103 +195,6 @@ Both annotations can be used together to manage dependency injection effectively
             return new DemoBean();
         }
         ```
-
-#### Using @Qualifier
-
-1. **Annotation-based configuration (Component Scanning)**:
-
-   1. Constructor Injection
-
-      - Constructor injection is a preferred method for dependency injection because -
-
-        1. Dependencies are immutable and required.
-        2. Ensures that the bean is fully initialized when created.
-
-      - Example:
-
-        ```java
-        @Component
-        public class MyService {
-
-            private final MyRepository myRepository;
-
-            @Autowired
-            @Qualifier("specificRepository")
-            public MyService(MyRepository myRepository) {
-                this.myRepository = myRepository;
-            }
-
-        }
-        ```
-
-   2. Setter Injection
-
-      - This method is useful when you want to provide optional dependencies or change dependencies after bean creation.
-
-      - Example:
-
-        ```java
-        @Component
-        public class MyService {
-
-            private MyRepository myRepository;
-
-            @Autowired
-            @Qualifier("specificRepository")
-            public void setMyRepository(MyRepository myRepository) {
-                this.myRepository = myRepository;
-            }
-        }
-        ```
-
-   3. Field Injection
-
-      - Field injection is the simplest form of dependency injection where dependencies are injected directly into the fields.
-
-      - Example:
-
-        ```java
-
-        @Component
-        public class MyService {
-
-            @Autowired
-            @Qualifier("specificRepository")
-            private MyRepository myRepository;
-        }
-        ```
-
-      - Advantages: Simple and concise.
-      - Disadvantages:
-        1. Makes the class harder to test (e.g., with unit tests).
-        2. Does not ensure immutability of dependencies.
-
-2. **Java-Based Configuration with @Qualifier**
-
-   - To specify which bean should be injected when there are multiple options, you use the @Qualifier annotation.
-
-   - Example:
-
-     ```java
-     @Configuration
-     public class AppConfig {
-
-         @Bean
-         public Service service1() {
-             return new Service("Service1");
-         }
-
-         @Bean
-         public Service service2() {
-             return new Service("Service2");
-         }
-
-         @Bean
-         public Consumer consumer(@Qualifier("service1") Service service) {
-             return new Consumer(service);
-         }
-     }
-     ```
 
 ### Use Cases
 

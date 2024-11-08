@@ -1,7 +1,5 @@
 # `@SpringBootApplication` Annotation
 
-## Overview
-
 The `@SpringBootApplication` annotation is a core annotation in Spring Boot that combines three crucial annotations:
 
 - `@Configuration`: Indicates that the class is a source of bean definitions.
@@ -31,31 +29,31 @@ public class MySpringBootApplication {
 
 In this example:
 
-- The MySpringBootApplication class is annotated with @SpringBootApplication, making it the entry point for the Spring Boot application.
-- The SpringApplication.run() method launches the Spring Boot application.
+- The `MySpringBootApplication` class is annotated with `@SpringBootApplication`, making it the entry point for the Spring Boot application.
+- The `SpringApplication.run()` method launches the Spring Boot application.
 
-### Breakdown of the Combined Annotations
+## Breakdown of the Combined Annotations
 
-1. @Configuration
+1. `@Configuration`
 
    - Declares the class as a source of bean definitions for the Application Context.
    - Allows you to define beans using `@Bean` methods.
 
-2. @EnableAutoConfiguration
+2. `@EnableAutoConfiguration`
 
    - Tells Spring Boot to start adding beans based on classpath settings, other beans, and various property settings.
    - Automatically configures your Spring application based on the dependencies declared in your `pom.xml` or `build.gradle`.
-   - For example, if you have spring-boot-starter-web in your classpath, this annotation will configure components like a DispatcherServlet automatically.
+   - For example, if you have `spring-boot-starter-web` in your classpath, this annotation will configure components like a `DispatcherServlet` automatically.
 
-3. @ComponentScan
+3. `@ComponentScan`
 
-   - Automatically scans the package of the annotated class and its sub-packages for Spring components (like @Controller, @Service, @Repository, etc.) and registers them as beans in the application context.
+   - Automatically scans the package of the annotated class and its sub-packages for Spring components (like `@Controller`, `@Service`, `@Repository`, etc.) and registers them as beans in the application context.
 
 ## Customizing @SpringBootApplication
 
 ### Excluding Auto-Configuration Classes
 
-If you need to exclude certain auto-configuration classes, you can customize the @SpringBootApplication annotation:
+If you need to exclude certain auto-configuration classes, you can customize the `@SpringBootApplication` annotation:
 
 ```java
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -70,11 +68,11 @@ public class MySpringBootApplication {
 }
 ```
 
-In this example, SecurityAutoConfiguration is excluded from auto-configuration.
+In this example, `SecurityAutoConfiguration` is excluded from auto-configuration.
 
-### When Not to Use @SpringBootApplication
+### When Not to Use `@SpringBootApplication`
 
-In some cases, you might need finer control over your configuration and might opt not to use @SpringBootApplication in favor of manually combining @EnableAutoConfiguration, @ComponentScan, and @Configuration.
+In some cases, you might need finer control over your configuration and might opt not to use `@SpringBootApplication` in favor of manually combining `@EnableAutoConfiguration`, `@ComponentScan`, and `@Configuration`.
 
 ### Questions
 

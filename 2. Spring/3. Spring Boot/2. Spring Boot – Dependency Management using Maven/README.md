@@ -30,7 +30,7 @@
    - **`test`**: Dependencies are used for testing only.
 
 5. **Version Management**:
-   - Define dependency versions directly in the `pom.xml` or use a parent POM for version management across multiple projects.
+   - Define dependency versions directly in the `pom.xml`.
    - Spring Boot provides dependency management for common versions used in its starters, simplifying version control.
 
 ### Example
@@ -122,7 +122,7 @@
 
 Maven is a build automation tool used primarily for Java projects. Below are some essential Maven commands you might use in your development workflow.
 
-#### Basic Commands
+### Basic Commands
 
 1. **`mvn clean`**
 

@@ -1,103 +1,94 @@
 # Spring @Value Annotation
 
-## Theory
+- The `@Value` annotation in Spring is used to inject externalized properties into fields, methods and constructor parameters from property files or expression evaluations.
+- It provides a way to externalize configuration and make it easier to manage and change application settings.
 
-The `@Value` annotation in Spring is used to inject externalized properties into fields, methods, and constructor parameters from property files or expression evaluations. It provides a way to externalize configuration and make it easier to manage and change application settings.
+## Example
 
-### Key Points
+### 1. Using @Value with Properties Files:
 
-- **Definition**: The `@Value` annotation is used to inject values into Spring-managed beans. These values can come from properties (`application.properties`) files, environment variables, or Spring Expression Language (SpEL) expressions.
-- **Purpose**: To externalize configuration settings and inject them into beans, promoting flexibility and ease of maintenance.
-- **Usage**: Can be applied to fields, setter methods, and constructor parameters.
+- `application.properties` file `src/main/resources` has the following content:
 
-### Example
+  ```
+  app.name=MyApp
+  app.version=1.0.0
+  ```
 
-1. Using @Value with Properties Files:
+- You can inject these values into a Spring component using the `@Value` annotation:
 
-   - Suppose you have a application.properties file located in src/main/resources with the following content:
+  ```java
+  import org.springframework.beans.factory.annotation.Value;
+  import org.springframework.stereotype.Component;
 
-     ```
-     app.name=MyApp
-     app.version=1.0.0
-     ```
+  @Component
+  public class MyService {
 
-   - You can inject these values into a Spring component using the @Value annotation:
+      @Value("${app.name}")
+      private String appName;
 
-     ```java
-     import org.springframework.beans.factory.annotation.Value;
-     import org.springframework.stereotype.Component;
+      @Value("${app.version}")
+      private String appVersion;
 
-     @Component
-     public class MyService {
+      public void printAppInfo() {
+          System.out.println("Application Name: " + appName);
+          System.out.println("Application Version: " + appVersion);
+      }
+  }
+  ```
 
-         @Value("${app.name}")
-         private String appName;
+- In this example:
+  - `@Value("${app.name}")` injects the value of `app.name` from a properties file into the `appName` field.
+  - `@Value("${app.version}")` injects the value of `app.version` into the `appVersion` field.
 
-         @Value("${app.version}")
-         private String appVersion;
+### 2. Using @Value with Environment Variables:
 
-         public void printAppInfo() {
-             System.out.println("Application Name: " + appName);
-             System.out.println("Application Version: " + appVersion);
-         }
-     }
-     ```
+- You can also use the `@Value` annotation to inject environment variables:
+- Example:
 
-   - In this example:
-     - @Value("${app.name}") injects the value of app.name from a properties file into the appName field.
-     - @Value("${app.version}") injects the value of app.version into the appVersion field.
+  - You have an environment variable `DB_URL` set in your system:
 
-2. Using @Value with Environment Variables:
+    ```bash
+    export DB_URL=jdbc:mysql://localhost:3306/mydb
+    ```
 
-   - You can also use the @Value annotation to inject environment variables:
-   - Example:
+  - You can inject this environment variable into a Spring component:
 
-     - Assume you have an environment variable DB_URL set in your system:
+    ```java
+    import org.springframework.beans.factory.annotation.Value;
+    import org.springframework.stereotype.Component;
 
-       ```bash
-       export DB_URL=jdbc:mysql://localhost:3306/mydb
-       ```
+    @Component
+    public class DatabaseConfig {
 
-     - You can inject this environment variable into a Spring component:
+        @Value("${DB_URL}")
+        private String dbUrl;
 
-       ```java
-       import org.springframework.beans.factory.annotation.Value;
-       import org.springframework.stereotype.Component;
+        // Getters and setters
+    }
+    ```
 
-       @Component
-       public class DatabaseConfig {
+### 3. Using @Value with Spring Expression Language (SpEL) Expressions
 
-           @Value("${DB_URL}")
-           private String dbUrl;
+```java
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-           // Getters and setters
-       }
-       ```
+@Component
+public class MyService {
 
-3. Using @Value with Spring Expression Language (SpEL) Expressions
+    @Value("#{T(java.lang.Math).random() * 100.0}")
+    private double randomNumber;
 
-   ```java
-   import org.springframework.beans.factory.annotation.Value;
-   import org.springframework.stereotype.Component;
+    @Value("#{systemProperties['user.home']}")
+    private String userHome;
+}
+```
 
-   @Component
-   public class MyService {
-
-       @Value("#{T(java.lang.Math).random() * 100.0}")
-       private double randomNumber;
-
-       @Value("#{systemProperties['user.home']}")
-       private String userHome;
-   }
-   ```
-
-   - In this example:
-     - `@Value("#{T(java.lang.Math).random() \* 100.0}")` uses SpEL to inject a random number between 0 and 100.
-     - `@Value(#{systemProperties['user.home']})` retrieves the user's home directory.
+- In this example:
+  - `@Value("#{T(java.lang.Math).random() \* 100.0}")` uses SpEL to inject a random number between 0 and 100.
+  - `@Value(#{systemProperties['user.home']})` retrieves the user's home directory.
 
 ### Setting Up Additional Properties Files
-
-By default, Spring Boot loads properties from `application.properties` or `application.yml`. To use additional properties files:
 
 1. Create Additional Properties Files:
 
@@ -128,10 +119,6 @@ By default, Spring Boot loads properties from `application.properties` or `appli
 1. External Configuration: Inject configuration values from properties files or environment variables to decouple configuration from code.
 2. Dynamic Values: Use SpEL to inject dynamic values or expressions that need to be evaluated at runtime.
 3. Environment-Specific Configuration: Manage different configurations for different environments by using external property files.
-
-### Summary
-
-The @Value annotation provides a flexible way to inject external values into Spring-managed beans, supporting both property files and dynamic expressions. It is essential for externalizing configuration and managing application settings.
 
 ### Questions
 

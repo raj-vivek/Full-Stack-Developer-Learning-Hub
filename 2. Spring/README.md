@@ -4,8 +4,7 @@
 
 - Spring Framework is a comprehensive and versatile open-source Java-based framework for enterprise Java development.
 - Known for its Inversion of Control (IoC) and Dependency Injection (DI) capabilities that simplify creating modular and testable applications.
-
-Its architecture is designed around two core principles: Dependency Injection (DI) and Aspect-Oriented Programming (AOP).
+- Its architecture is designed around two core principles: Dependency Injection (DI) and Aspect-Oriented Programming (AOP).
 
 - Key features include -
 
